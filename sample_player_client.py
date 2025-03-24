@@ -16,8 +16,7 @@ class PlayerGameClient(Client):
 
             # Jour 0 : Initialisation de la stratégie
             if game_data["day"] == 0:
-=======
-                self.add_command("0 EMPRUNTER 100000")
+
                 self.add_command("0 ACHETER_CHAMP")
                 self.add_command("0 ACHETER_CHAMP")
                 self.add_command("0 ACHETER_CHAMP")
@@ -34,7 +33,6 @@ class PlayerGameClient(Client):
                 self.add_command("3 SEMER POIREAU 2")
                 self.add_command("4 SEMER OIGNON 1")
 
->>>>>>> 80f6b99b573314df3dcd8f052535d1b6cc313e1c
             self.send_commands()
 
     def add_command(self, command: str) -> None:

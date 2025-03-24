@@ -16,22 +16,14 @@ class PlayerGameClient(Client):
 
             # Jour 0 : Initialisation de la stratégie
             if game_data["day"] == 0:
-
-                self.add_command("0 ACHETER_CHAMP")
-                self.add_command("0 ACHETER_CHAMP")
                 self.add_command("0 ACHETER_CHAMP")
                 self.add_command("0 ACHETER_CHAMP")
                 self.add_command("0 ACHETER_CHAMP")
                 self.add_command("0 ACHETER_TRACTEUR")
-                self.add_command("0 ACHETER_TRACTEUR")
                 self.add_command("0 EMPLOYER")
                 self.add_command("0 EMPLOYER")
-                self.add_command("0 EMPLOYER")
-                self.add_command("0 EMPLOYER")
-                self.add_command("1 SEMER TOMATE 4")
-                self.add_command("2 SEMER PATATE 3")
-                self.add_command("3 SEMER POIREAU 2")
-                self.add_command("4 SEMER OIGNON 1")
+                self.add_command("1 SEMER TOMATE 1")
+                self.add_command("2 SEMER PATATE 2")
 
             self.send_commands()
 

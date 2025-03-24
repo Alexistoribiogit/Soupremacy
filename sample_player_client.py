@@ -16,20 +16,25 @@ class PlayerGameClient(Client):
 
             # Jour 0 : Initialisation de la stratégie
             if game_data["day"] == 0:
-                self.add_command("0 ACHETER_CHAMP")  # Acheter un champ
-                self.add_command("0 EMPLOYER")  # Embaucher un ouvrier
-                self.add_command("1 SEMER TOMATE 1")  # Semer des tomates sur le champ
-            
-            # Arroser le champ jusqu'à la récolte
-            if "champs" in my_farm:
-                for champ in my_farm["champs"]:
-                    if champ["arrosages"] < 10:
-                        self.add_command(f"1 ARROSER {champ['id']}")
-                    elif champ["arrosages"] == 10 and not champ["recoltable"]:
-                        print(f"Champ {champ['id']} prêt à être récolté.")
-                    elif champ["recoltable"]:
-                        self.add_command("0 VENDRE {champ['id']}")
-                        
+=======
+                self.add_command("0 EMPRUNTER 100000")
+                self.add_command("0 ACHETER_CHAMP")
+                self.add_command("0 ACHETER_CHAMP")
+                self.add_command("0 ACHETER_CHAMP")
+                self.add_command("0 ACHETER_CHAMP")
+                self.add_command("0 ACHETER_CHAMP")
+                self.add_command("0 ACHETER_TRACTEUR")
+                self.add_command("0 ACHETER_TRACTEUR")
+                self.add_command("0 EMPLOYER")
+                self.add_command("0 EMPLOYER")
+                self.add_command("0 EMPLOYER")
+                self.add_command("0 EMPLOYER")
+                self.add_command("1 SEMER TOMATE 4")
+                self.add_command("2 SEMER PATATE 3")
+                self.add_command("3 SEMER POIREAU 2")
+                self.add_command("4 SEMER OIGNON 1")
+
+>>>>>>> 80f6b99b573314df3dcd8f052535d1b6cc313e1c
             self.send_commands()
 
     def add_command(self, command: str) -> None:

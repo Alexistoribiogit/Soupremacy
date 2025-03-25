@@ -12,7 +12,6 @@ class PlayerGameClient(Client):
     def run(self) -> None:
         while True:
             game_data = self.read_json()
-
             commands = decide_commands(game_data)
             for command in commands:
                 self.add_command(command)

@@ -16,4 +16,4 @@ class Champ:
         self.nb_arrosages_restants -= 1
 
     def recoltable(self):
-        return False
+        return self.legume is not None and self.nb_arrosages_restants == 0

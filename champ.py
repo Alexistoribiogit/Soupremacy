@@ -14,3 +14,6 @@ class Champ:
 
     def arroser(self):
         self.nb_arrosages_restants -= 1
+
+    def recoltable(self):
+        return False

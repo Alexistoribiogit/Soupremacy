@@ -38,3 +38,8 @@ def test_champ_arroser_mais_pas_assez():
     for _ in range(9):
         champ.arroser()
     assert champ.arrosable() == True
+
+
+def test_champ_vide_non_recoltable():
+    champ = Champ()
+    assert champ.recoltable() == False

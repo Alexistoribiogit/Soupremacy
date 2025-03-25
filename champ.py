@@ -7,3 +7,6 @@ class Champ:
 
     def semer(self, legume):
         self.legume = legume
+
+    def arrosable(self):
+        return False

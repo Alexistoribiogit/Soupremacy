@@ -29,7 +29,10 @@ def test_farm_with_field_needing_watering():
     game_state = {
         "day": 1,
         "farms": [
-            {"name": "Soupremacy", "fields": [{"content": "PATATE", "needed_water": 1}]}
+            {
+                "name": "Soupremacy",
+                "fields": [{"content": "COURGETTE", "needed_water": 1}],
+            }
         ],
     }
     expected_commands = ["1 ARROSER 1"]
@@ -40,7 +43,10 @@ def test_farm_with_field_ready_for_harvest():
     game_state = {
         "day": 1,
         "farms": [
-            {"name": "Soupremacy", "fields": [{"content": "PATATE", "needed_water": 0}]}
+            {
+                "name": "Soupremacy",
+                "fields": [{"content": "COURGETTE", "needed_water": 0}],
+            }
         ],
     }
     expected_commands = ["0 VENDRE 1"]

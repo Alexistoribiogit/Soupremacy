@@ -26,7 +26,7 @@ def decide_commands(game_state: dict) -> list[str]:
         champ1.legume = Legume.PATATE
     champ1.nb_arrosages_restants = premier_champ["needed_water"]
     if champ1.semable():
-        commands.append("1 SEMER PATATE 1")
+        commands.append("1 SEMER COURGETTE 1")
         gerant_disponible = True
     elif champ1.arrosable():
         commands.append("1 ARROSER 1")

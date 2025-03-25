@@ -22,3 +22,11 @@ def test_champ_juste_semer_non_arrosable():
     champ = Champ()
     champ.semer(Legume.PATATE)
     assert champ.arrosable() == True
+
+
+def test_champ_arroser():
+    champ = Champ()
+    champ.semer(Legume.PATATE)
+    for _ in range(10):
+        champ.arroser()
+    assert champ.arrosable() == False

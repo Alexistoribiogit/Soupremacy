@@ -1,7 +1,7 @@
 class Champ:
     def __init__(self):
         self.legume = None
-        self.arrose = False
+        self.nb_arrosages_restants = 10
 
     def semable(self):
         return self.legume is None
@@ -10,7 +10,7 @@ class Champ:
         self.legume = legume
 
     def arrosable(self):
-        return self.legume is not None and not self.arrose
+        return self.legume is not None and self.nb_arrosages_restants != 0
 
     def arroser(self):
-        self.arrose = True
+        self.nb_arrosages_restants -= 1

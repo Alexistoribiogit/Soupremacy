@@ -30,3 +30,11 @@ def test_champ_arroser():
     for _ in range(10):
         champ.arroser()
     assert champ.arrosable() == False
+
+
+def test_champ_arroser_mais_pas_assez():
+    champ = Champ()
+    champ.semer(Legume.PATATE)
+    for _ in range(9):
+        champ.arroser()
+    assert champ.arrosable() == True

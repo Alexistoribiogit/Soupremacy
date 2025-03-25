@@ -1,6 +1,9 @@
 import argparse
 from chronobio.network.client import Client
 
+from strategy import decide_commands
+
+
 class PlayerGameClient(Client):
     def __init__(self, server_addr: str, port: int, username: str) -> None:
         super().__init__(server_addr, port, username, spectator=False)
@@ -11,19 +14,13 @@ class PlayerGameClient(Client):
             game_data = self.read_json()
 
             # Trouver notre ferme
-            my_farm = next(farm for farm in game_data["farms"] if farm["name"] == self.username)
+            my_farm = next(
+                farm for farm in game_data["farms"] if farm["name"] == self.username
+            )
             print(my_farm)  # Debug : afficher les infos de la ferme
-
-            # Jour 0 : Initialisation de la stratégie
-            if game_data["day"] == 0:
-                self.add_command("0 ACHETER_CHAMP")
-                self.add_command("0 ACHETER_CHAMP")
-                self.add_command("0 ACHETER_CHAMP")
-                self.add_command("0 ACHETER_TRACTEUR")
-                self.add_command("0 EMPLOYER")
-                self.add_command("0 EMPLOYER")
-                self.add_command("1 SEMER TOMATE 1")
-                self.add_command("2 SEMER PATATE 2")
+            commands = decide_commands(game_data)
+            for command in commands:
+                self.add_command(command)
 
             self.send_commands()
 
@@ -36,11 +33,16 @@ class PlayerGameClient(Client):
         self.send_json(data)
         self._commands.clear()
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Game client.")
-    parser.add_argument("-a", "--address", type=str, default="localhost", help="Server address")
+    parser.add_argument(
+        "-a", "--address", type=str, default="localhost", help="Server address"
+    )
     parser.add_argument("-p", "--port", type=int, default=12345, help="Server port")
-    parser.add_argument("-u", "--username", type=str, default="Soupremacy", help="Username")
+    parser.add_argument(
+        "-u", "--username", type=str, default="Soupremacy", help="Username"
+    )
 
     args = parser.parse_args()
     client = PlayerGameClient(args.address, args.port, args.username)

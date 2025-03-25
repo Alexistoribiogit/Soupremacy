@@ -13,11 +13,6 @@ class PlayerGameClient(Client):
         while True:
             game_data = self.read_json()
 
-            # Trouver notre ferme
-            my_farm = next(
-                farm for farm in game_data["farms"] if farm["name"] == self.username
-            )
-            print(my_farm)  # Debug : afficher les infos de la ferme
             commands = decide_commands(game_data)
             for command in commands:
                 self.add_command(command)

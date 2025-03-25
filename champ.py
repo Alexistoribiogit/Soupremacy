@@ -9,4 +9,4 @@ class Champ:
         self.legume = legume
 
     def arrosable(self):
-        return False
+        return self.legume is not None

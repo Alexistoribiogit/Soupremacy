@@ -47,13 +47,13 @@ def test_champ_vide_non_recoltable():
 
 def test_champ_juste_semer_non_recoltable():
     champ = Champ()
-    champ.semer(Legume.PATATE)
+    champ.semer(Legume.COURGETTE)
     assert champ.recoltable() == False
 
 
 def test_champ_pas_assez_arrose_non_recoltable():
     champ = Champ()
-    champ.semer(Legume.PATATE)
+    champ.semer(Legume.COURGETTE)
     for _ in range(9):
         champ.arroser()
     assert champ.recoltable() == False
@@ -61,7 +61,11 @@ def test_champ_pas_assez_arrose_non_recoltable():
 
 def test_champ_recoltable():
     champ = Champ()
-    champ.semer(Legume.PATATE)
+    champ.semer(Legume.COURGETTE)
     for _ in range(10):
         champ.arroser()
     assert champ.recoltable() == True
+
+
+def test_champ_stockable():
+    pass

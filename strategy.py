@@ -52,11 +52,12 @@ def decide_commands(game_state: dict) -> list[str]:
     # Gestion du deuxième champ (TOMATE)
     if len(my_farm["fields"]) > 1:
         deuxième_champ = my_farm["fields"][1]
+        print(deuxième_champ)
 
+        # Vérifier si le champ a été acheté
         if not deuxième_champ.get("bought", False):
             return commands
 
-        print(deuxième_champ)
         champ2 = Champ()
         if deuxième_champ["content"] == "NONE":
             champ2.legume = None
@@ -64,11 +65,13 @@ def decide_commands(game_state: dict) -> list[str]:
             champ2.legume = Legume.TOMATE
         champ2.nb_arrosages_restants = deuxième_champ["needed_water"]
 
+        # Utilisation de l'employé 2 pour SEMER ou ARROSER
         if champ2.semable():
             commands.append("2 SEMER TOMATE 2")
         elif champ2.arrosable():
             commands.append("2 ARROSER 2")
         elif champ2.recoltable():
+            # Priorité au tracteur pour STOCKER
             if my_farm.get("tractors", 0) > 0:
                 commands.append("2 STOCKER 2 1")
             elif gerant_disponible:

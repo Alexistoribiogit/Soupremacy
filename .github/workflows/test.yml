@@ -1,4 +1,4 @@
-name: Tests
+name: Tests & Coverage
 
 on: [push, pull_request]
 
@@ -24,7 +24,10 @@ jobs:
           pytest --cov=. test/
           coverage report --fail-under=80
 
-      - name: Lint code
+      - name: Generate coverage HTML (optional)
+        run: coverage html
+
+      - name: Lint code (optional)
         run: |
           pip install flake8
           flake8 .

@@ -88,6 +88,7 @@ def test_semer_tomate_sur_champ2():
             {
                 "name": "Soupremacy",
                 "money": 5000,
+                "employees": [{"id": 1}],
                 "fields": [
                     {"id": 1, "content": "COURGETTE", "needed_water": 5},
                     {"id": 2, "content": "NONE", "needed_water": 10},
@@ -96,7 +97,7 @@ def test_semer_tomate_sur_champ2():
         ],
     }
     commands = decide_commands(game_state)
-    assert "1 SEMER TOMATE 2" in commands
+    assert "2 SEMER TOMATE 2" in commands
 
 
 def test_arroser_champ2():
@@ -106,6 +107,7 @@ def test_arroser_champ2():
             {
                 "name": "Soupremacy",
                 "money": 5000,
+                "employees": [{"id": 1}, {"id": 2}],
                 "fields": [
                     {"id": 1, "content": "COURGETTE", "needed_water": 0},
                     {"id": 2, "content": "TOMATE", "needed_water": 5},
@@ -114,7 +116,7 @@ def test_arroser_champ2():
         ],
     }
     commands = decide_commands(game_state)
-    assert "1 ARROSER 2" in commands
+    assert "2 ARROSER 2" in commands
 
 
 def test_stocker_champ2():
@@ -125,6 +127,7 @@ def test_stocker_champ2():
                 "name": "Soupremacy",
                 "money": 5000,
                 "tractors": 1,
+                "employees": [{"id": 1}, {"id": 2}],
                 "fields": [
                     {"id": 1, "content": "COURGETTE", "needed_water": 5},
                     {"id": 2, "content": "TOMATE", "needed_water": 0},
@@ -137,4 +140,23 @@ def test_stocker_champ2():
     gerant_disponible = True
 
     commands = decide_commands(game_state)
-    assert "1 STOCKER 2 1" in commands
+    assert "2 STOCKER 2 1" in commands
+
+
+def test_embauche_deuxieme_ouvrier():
+    game_state = {
+        "day": 5,
+        "farms": [
+            {
+                "name": "Soupremacy",
+                "money": 5000,
+                "employees": [{"id": 1}],
+                "fields": [
+                    {"id": 1, "content": "COURGETTE", "needed_water": 5},
+                    {"id": 2, "content": "TOMATE", "needed_water": 3},
+                ],
+            }
+        ],
+    }
+    commands = decide_commands(game_state)
+    assert "0 EMPLOYER" in commands

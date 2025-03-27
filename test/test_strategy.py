@@ -88,10 +88,15 @@ def test_semer_tomate_sur_champ2():
             {
                 "name": "Soupremacy",
                 "money": 5000,
-                "employees": [{"id": 1}],
+                "employees": [{"id": 1}, {"id": 2}],
                 "fields": [
-                    {"id": 1, "content": "COURGETTE", "needed_water": 5},
-                    {"id": 2, "content": "NONE", "needed_water": 10},
+                    {
+                        "id": 1,
+                        "content": "COURGETTE",
+                        "needed_water": 5,
+                        "bought": True,
+                    },
+                    {"id": 2, "content": "NONE", "needed_water": 10, "bought": True},
                 ],
             }
         ],
@@ -109,8 +114,13 @@ def test_arroser_champ2():
                 "money": 5000,
                 "employees": [{"id": 1}, {"id": 2}],
                 "fields": [
-                    {"id": 1, "content": "COURGETTE", "needed_water": 0},
-                    {"id": 2, "content": "TOMATE", "needed_water": 5},
+                    {
+                        "id": 1,
+                        "content": "COURGETTE",
+                        "needed_water": 0,
+                        "bought": True,
+                    },
+                    {"id": 2, "content": "TOMATE", "needed_water": 5, "bought": True},
                 ],
             }
         ],
@@ -129,8 +139,13 @@ def test_stocker_champ2():
                 "tractors": 1,
                 "employees": [{"id": 1}, {"id": 2}],
                 "fields": [
-                    {"id": 1, "content": "COURGETTE", "needed_water": 5},
-                    {"id": 2, "content": "TOMATE", "needed_water": 0},
+                    {
+                        "id": 1,
+                        "content": "COURGETTE",
+                        "needed_water": 5,
+                        "bought": True,
+                    },
+                    {"id": 2, "content": "TOMATE", "needed_water": 0, "bought": True},
                 ],
             }
         ],

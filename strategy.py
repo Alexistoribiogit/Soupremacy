@@ -43,20 +43,20 @@ def decide_commands(game_state: dict) -> list[str]:
     # Acheter un deuxième champ si disponible et argent suffisant
     if len(my_farm["fields"]) == 1 and my_farm["money"] >= 10000:
         commands.append("0 ACHETER_CHAMP")
+        return commands
 
     # Embaucher un 2e ouvrier s'il n'y en a qu'un et 2 champs
     if len(my_farm["fields"]) >= 2 and len(my_farm.get("employees", [])) < 2:
         commands.append("0 EMPLOYER")
 
     # Gestion du deuxième champ (TOMATE)
-    if (
-        len(my_farm["fields"]) > 1
-        and my_farm["fields"][1].get("bought", True)
-        and my_farm["fields"][1].get("content") is not None
-    ):
+    if len(my_farm["fields"]) > 1:
         deuxième_champ = my_farm["fields"][1]
-        print(deuxième_champ)
 
+        if not deuxième_champ.get("bought", False):
+            return commands
+
+        print(deuxième_champ)
         champ2 = Champ()
         if deuxième_champ["content"] == "NONE":
             champ2.legume = None

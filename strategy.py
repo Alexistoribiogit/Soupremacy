@@ -44,6 +44,10 @@ def decide_commands(game_state: dict) -> list[str]:
     if len(my_farm["fields"]) == 1 and my_farm["money"] >= 10000:
         commands.append("0 ACHETER_CHAMP")
 
+    # Embaucher un 2e ouvrier s'il n'y en a qu'un et 2 champs
+    if len(my_farm["fields"]) >= 2 and len(my_farm.get("employees", [])) < 2:
+        commands.append("0 EMPLOYER")
+
     # Gestion du deuxième champ (TOMATE)
     if len(my_farm["fields"]) > 1:
         deuxième_champ = my_farm["fields"][1]
@@ -57,12 +61,12 @@ def decide_commands(game_state: dict) -> list[str]:
         champ2.nb_arrosages_restants = deuxième_champ["needed_water"]
 
         if champ2.semable():
-            commands.append("1 SEMER TOMATE 2")
+            commands.append("2 SEMER TOMATE 2")
         elif champ2.arrosable():
-            commands.append("1 ARROSER 2")
+            commands.append("2 ARROSER 2")
         elif champ2.recoltable():
             if my_farm.get("tractors", 0) > 0:
-                commands.append("1 STOCKER 2 1")
+                commands.append("2 STOCKER 2 1")
             elif gerant_disponible:
                 commands.append("0 VENDRE 2")
                 gerant_disponible = False

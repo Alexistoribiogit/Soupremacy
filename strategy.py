@@ -36,7 +36,7 @@ def decide_commands(game_state: dict) -> list[str]:
         gerant_disponible = True
     elif champ1.arrosable():
         commands.append("1 ARROSER 1")
-    elif champ1.recoltable() and gerant_disponible == True:
+    elif champ1.recoltable() and gerant_disponible:
         commands.append("0 VENDRE 1")
         gerant_disponible = False
 
@@ -49,7 +49,11 @@ def decide_commands(game_state: dict) -> list[str]:
         commands.append("0 EMPLOYER")
 
     # Gestion du deuxième champ (TOMATE)
-    if len(my_farm["fields"]) > 1:
+    if (
+        len(my_farm["fields"]) > 1
+        and my_farm["fields"][1].get("bought", True)
+        and my_farm["fields"][1].get("content") is not None
+    ):
         deuxième_champ = my_farm["fields"][1]
         print(deuxième_champ)
 

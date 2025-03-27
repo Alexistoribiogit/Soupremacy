@@ -22,7 +22,7 @@ class PlayerGameClient(Client):
         self._commands.append(command)
 
     def send_commands(self) -> None:
-        data = {"commands": self._commands}
+        data = {"commands": self._commands.copy()}
         print("sending", data)
         self.send_json(data)
         self._commands.clear()

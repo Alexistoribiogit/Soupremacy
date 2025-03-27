@@ -69,3 +69,29 @@ def test_champ_recoltable():
 
 def test_champ_stockable():
     pass
+
+
+def test_champ_tomate_semable():
+    champ = Champ()
+    assert champ.semable() == True
+    champ.semer(Legume.TOMATE)
+    assert champ.semable() == False
+
+
+def test_champ_tomate_arrosable():
+    champ = Champ()
+    champ.semer(Legume.TOMATE)
+    assert champ.arrosable() == True
+    for _ in range(15):
+        champ.arroser()
+    assert champ.arrosable() == False
+
+
+def test_champ_tomate_recoltable():
+    champ = Champ()
+    champ.semer(Legume.TOMATE)
+    for _ in range(14):
+        champ.arroser()
+    assert champ.recoltable() == False
+    champ.arroser()
+    assert champ.recoltable() == True

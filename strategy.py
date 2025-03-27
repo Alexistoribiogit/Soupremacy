@@ -74,6 +74,5 @@ def decide_commands(game_state: dict) -> list[str]:
             elif gerant_disponible:
                 commands.append("0 VENDRE 2")
                 gerant_disponible = False
-        return commands
 
     return commands

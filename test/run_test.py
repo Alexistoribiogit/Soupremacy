@@ -3,7 +3,7 @@ import os
 import sys
 import webbrowser
 
-# Analyse manuelle de la couverture par fichier
+# Analyse manuelle de couverture par fichier
 def analyse_manuelle():
     print("\n📊 ANALYSE MANUELLE DE COUVERTURE :")
 
@@ -31,7 +31,12 @@ def analyse_manuelle():
         "strategy.py": {
             "couverture": "~95%",
             "non_testé": "print(), usage unique de Legume.PATATE",
-            "remarques": "Bonne logique testée, mais test de console absent"
+            "remarques": "Bonne logique testée, test console non fait"
+        },
+        "sample_player_client.py": {
+            "couverture": "80%+",
+            "non_testé": "Boucle infinie réelle, lecture réseau non simulée sur plusieurs tours",
+            "remarques": "Testé via mocks. Bonne couverture unitaire des méthodes principales."
         }
     }
 
@@ -41,7 +46,7 @@ def analyse_manuelle():
         print(f"   🔸 Non testé  : {infos['non_testé']}")
         print(f"   📝 Remarques  : {infos['remarques']}")
 
-# Fonction générique d’exécution
+# Fonction d'exécution d'une commande
 def run_command(command, description):
     print(f"\n📦 {description}")
     print(">>>", " ".join(command))
@@ -55,23 +60,28 @@ def run_command(command, description):
 def run_tests():
     os.environ["PYTHONPATH"] = os.getcwd()
 
+    # Étape 1 : Tests avec couverture
     run_command(
-        ["python", "-m", "pytest", "--cov=.", "test/"],
+        ["python", "-m", "pytest", "--cov=.", "--cov-config=setup.cfg", "test/"],
         "Lancement des tests avec couverture"
     )
 
+    # Étape 2 : Vérification du seuil
     run_command(
         ["coverage", "report", "--fail-under=80"],
         "Vérification de la couverture (≥ 80%)"
     )
 
+    # Étape 3 : Rapport HTML
     run_command(
         ["coverage", "html"],
         "Génération du rapport HTML de couverture"
     )
 
+    # Étape 4 : Analyse manuelle
     analyse_manuelle()
 
+    # Étape 5 : Ouvrir le rapport dans le navigateur
     index_path = os.path.abspath("htmlcov/index.html")
     print(f"\n🌐 Ouverture du rapport HTML : {index_path}")
     webbrowser.open(f"file://{index_path}")

@@ -51,6 +51,7 @@ def decide_commands(game_state: dict) -> list[str]:
 
     # Gestion du deuxième champ (TOMATE)
     if len(my_farm["fields"]) > 1:
+        print(">>>> DEUCIEME CHAMP ACHETE :", my_farm["fields"][1].get("bought", False))
         deuxième_champ = my_farm["fields"][1]
         print(deuxième_champ)
 
